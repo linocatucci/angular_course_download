@@ -1,0 +1,20 @@
+<label>Server Name</label>
+<h3>input event</h3>
+<input type="text" class="form-control" (input)="onUpdateServerName($event)">
+<label>Met ngModel</label>
+<input type="text" class="form-control" [(ngModel)]="serverName">
+<label>Met string interpolation</label>
+<p>{{serverName}}</p>
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Add Server</button>
+<hr>
+<!--<p [innerText]="allowNewServer"></p>-->
+<!--<p>{{allowNewServer}}</p>-->
+<!--<p>{{serverCreationStatus}}</p>-->
+<p *ngIf="serverCreated; else noServer">The server was created: {{serverName}}</p>
+<ng-template #noServer>
+  <p>No Server was created!</p>
+</ng-template>
+<hr>
+<h4>Below is the app Server component</h4>
+<app-server *ngFor="let server of servers"></app-server>
+

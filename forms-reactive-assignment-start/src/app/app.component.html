@@ -1,0 +1,56 @@
+<script src="app.component.ts"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <h4>Angular Reactive Web Forms</h4>
+      <!--
+          Create a Form with the following Controls and Validators
+          1) Project Name (should not be empty)
+          2) Mail (should not be a empty and a valid email)
+          3) Project Status Dropdown, with three values: 'Stable', 'Critical', 'Finished'
+          4) Submit Button
+
+          Add your own Validator which doesn't allow "Test" as a Project Name
+
+          Also implement that Validator as an async Validator (replace the other one)
+
+          Upon submitting the form, simply print the value to the console
+      -->
+      <form [formGroup]="projectForm" (ngSubmit)="onSaveProject()">
+        <div class="form-group">
+          <label for="projectName">ProjectName</label>
+          <input
+            type="text"
+            id="projectName"
+            formControlName="projectName"
+            class="form-control">
+        </div>
+        <span class="help-block"
+              *ngIf="!projectForm.get('projectName').valid && projectForm.get('projectName').touched">
+              <span *ngIf="projectForm.get('projectName').hasError('nameIsForbidden')">This name is invalid!</span>
+              <span *ngIf="projectForm.get('projectName').hasError('required')">This field name is required!</span>
+            </span>
+        <div class="form-group">
+          <label for="email">email</label>
+          <input
+            type="text"
+            id="email"
+            formControlName="email"
+            class="form-control">
+        </div>
+        <span
+          *ngIf="!projectForm.get('email').valid && projectForm.get('email').touched">Please add a valid email</span>
+        <div class="dropdown">
+          <label for="projectStatus">Project Status</label>
+          <select class="form-control"  id="projectStatus" formCon>
+            <option *ngFor="let projectStatsVal of projectStatsVals" [value]="projectStatsVal">{{ projectStatsVal}}
+            </option>
+          </select>
+        </div>
+        <!--<span *ngIf="!signUpForm.valid && signUpForm.touched"-->
+        <!--class="help-block">Please fill in the form correctly!</span>-->
+        <button class="btn btn-primary" type="submit" id="btn_form_submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

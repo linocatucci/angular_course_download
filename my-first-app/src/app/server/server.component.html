@@ -1,0 +1,4 @@
+<!-- <h3 style="color:blueviolet">the server component</h3> -->
+<!-- <h3 [ngStyle]="{'background-color': 'red'}">the {{'server'}} with ID {{ serverId }} has a status of: {{ serverStatus }} </h3> -->
+<h3 [ngStyle]="{'background-color': getColor()}" [ngClass]="{'online': serverStatus === 'online'}">the {{'server'}} with ID {{ serverId }} has a status of: {{ serverStatus }}</h3>
+<!-- <h3 [ngStyle]="{'background-color': getColor()}" [ngClass]="{'online': serverStatus === 'online'}">the server with ID {{serverId}} has a status of: {{ getServerStatus() }} </h3> -->
