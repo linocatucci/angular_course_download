@@ -18,11 +18,17 @@ export class AuthService {
       .then(
         user => {
           this.store.dispatch(new AuthActions.SignUp());
+          firebase.auth().currentUser.getToken()
+            .then(
+              (token: string) => {
+                this.store.dispatch(new AuthActions.SetToken(token))
+              }
+            );
         }
       )
       .catch(
         error => console.log(error)
-      )
+      );
     this.router.navigate(['/']);
   }
 
@@ -49,6 +55,7 @@ export class AuthService {
     firebase.auth().signOut();
     this.store.dispatch(new AuthActions.LogOut())
   }
+
   // door ngrx module uit gezet
   // getToken() {
   //   firebase.auth().currentUser.getToken()
