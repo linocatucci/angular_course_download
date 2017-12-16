@@ -8,6 +8,8 @@ import {Store} from '@ngrx/store';
 import * as fromApp from '../../ngrx-store/app.reducers';
 import * as fromAuth from '../../auth/ngrx-store/auth.reducers'
 import {Observable} from 'rxjs/Observable';
+import * as AuthActions from '../../auth/ngrx-store/auth.actions';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-header',
@@ -42,8 +44,8 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     // this.authService.logout();
-    this.authService.logout();
-    this.router.navigate(['/']);
-
+    firebase.auth().signOut();
+    this.store.dispatch(new AuthActions.LogOut());
+    // this.router.navigate(['/shopping']);
   }
 }

@@ -52,8 +52,8 @@ export class AuthService {
   }
 
   logout() {
-    firebase.auth().signOut();
-    this.store.dispatch(new AuthActions.LogOut())
+    // firebase.auth().signOut();
+    // this.store.dispatch(new AuthActions.LogOut())
   }
 
   // door ngrx module uit gezet

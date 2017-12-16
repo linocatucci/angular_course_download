@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import {fromPromise} from 'rxjs/observable/fromPromise';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class AuthEffects {
@@ -22,7 +23,7 @@ export class AuthEffects {
       return fromPromise(firebase.auth().currentUser.getIdToken());
     })
     .mergeMap((token: string) => {
-      this.router.navigate(['shopping-list']);
+      this.router.navigate(['recipes']);
       return [
         {
           type: AuthActions.SIGNUP
@@ -47,7 +48,7 @@ export class AuthEffects {
       return fromPromise(firebase.auth().currentUser.getIdToken());
     })
     .mergeMap((token: string) => {
-      this.router.navigate(['shopping-list']);
+      this.router.navigate(['recipes']);
       return [
         {
           type: AuthActions.SIGNIN,
@@ -57,6 +58,12 @@ export class AuthEffects {
           payload: token
         }
       ]
+    });
+  @Effect({dispatch: false})
+  authLogout = this.actions$
+    .ofType(AuthActions.LOGOUT)
+    .do(() => {
+      this.router.navigate(['/']);
     });
 
   constructor(private actions$: Actions,
