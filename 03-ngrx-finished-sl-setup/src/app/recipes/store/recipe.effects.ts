@@ -1,12 +1,12 @@
 import {Actions, Effect} from '@ngrx/effects';
-import * as RecipeActions from '../ngrx-store/recipe.actions'
+import * as RecipeActions from './/recipe.actions'
 import 'rxjs/add/operator/switchMap';
 import {Recipe} from '../recipe.model';
 import {HttpClient, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Store} from '@ngrx/store';
-import * as fromRecipe from '../ngrx-store/recipe.reducers'
+import * as fromRecipe from './/recipe.reducers'
 
 @Injectable()
 export class RecipeEffects {

@@ -10,6 +10,7 @@ import * as fromAuth from '../../auth/ngrx-store/auth.reducers'
 import {Observable} from 'rxjs/Observable';
 import * as AuthActions from '../../auth/ngrx-store/auth.actions';
 import * as firebase from 'firebase';
+import * as RecipeActions from '../../recipes/store/recipe.actions'
 
 @Component({
   selector: 'app-header',
@@ -30,16 +31,17 @@ export class HeaderComponent implements OnInit {
   }
 
   onSaveData() {
-    this.dataStorageService.storeRecipes()
-      .subscribe(
-        (response) => {
-          console.log(response);
-        }
-      );
+    // this.dataStorageService.storeRecipes()
+    //   .subscribe(
+    //     (response) => {
+    //       console.log(response);
+    //     }
+    //   );
+    this.store.dispatch((new RecipeActions.StoreRecipes()));
   }
 
   onFetchData() {
-    this.dataStorageService.getRecipes();
+    this.store.dispatch(new RecipeActions.FetchRecipes());
   }
 
   onLogout() {
